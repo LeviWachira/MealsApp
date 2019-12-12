@@ -22,7 +22,6 @@ const MealItem = props => {
                 </View>
             </TouchableOpacity>
         </View>
-
     )
 }
 
