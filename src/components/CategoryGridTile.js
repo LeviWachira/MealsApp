@@ -11,19 +11,19 @@ import {
 
 const CategoryGridTile = props => {
 
-    let TouchableComponet = TouchableOpacity;
+    let TouchableComponent = TouchableOpacity;
 
     if (Platform.OS === 'android' && Platform.Version >= 21) {
-        TouchableComponet = TouchableNativeFeedback;
+        TouchableComponent = TouchableNativeFeedback;
     }
 
     return (
         <View style={styles.gridItem}>
-            <TouchableComponet style={{ flex : 1}} onPress={props.onSelect}>
+            <TouchableComponent style={{ flex : 1}} onPress={props.onSelect}>
                 <View style={{ ...styles.container, ...{ backgroundColor: props.color } }}>
                     <Text style={styles.text} numberOfLines={2}>{props.title}</Text>
                 </View>
-            </TouchableComponet>
+            </TouchableComponent>
         </View>
     )
 }
