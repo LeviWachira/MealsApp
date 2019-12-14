@@ -15,13 +15,17 @@ import FiltersScreen from '../screens/FiltersScreen';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from '../constant/Colors';
 
+
+//***************************************************** defaultNavigationOptions Fig HandleTitle  
 const defaultStackNavigationOptions = {
     headerStyle: {
         backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
     },
     headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
+    
 }
 
+//**************************************************** StackCategory Meals
 const MealsNavigator = createStackNavigator({
     Categories: {
         screen: CategoriesScreen
@@ -41,6 +45,7 @@ const FavNavigator = createStackNavigator({
     defaultNavigationOptions: defaultStackNavigationOptions
 });
 
+//************************************************** HandleIconTabBottom
 const tabScreenConfig = {
     Meals: {
         screen: MealsNavigator,
@@ -75,6 +80,7 @@ const tabScreenConfig = {
     }
 }
 
+//**************************************************** HandleTabBottom  
 const MealsFavTabNavigator = Platform.OS === 'android'
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
         activeTintColor: Colors.orangeColor,
@@ -92,6 +98,7 @@ const FilterNavigator = createStackNavigator({
     defaultNavigationOptions: defaultStackNavigationOptions
 });
 
+//************************************************ HandleDrawer Between Meals and Filters
 const MainNavigator = createDrawerNavigator({
     MealCategories: {
         screen: MealsFavTabNavigator,

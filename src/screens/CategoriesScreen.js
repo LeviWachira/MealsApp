@@ -3,9 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
-    Button,
     FlatList,
-    TouchableOpacity,
     Platform
 } from 'react-native';
 import { CATEGORIES } from '../data/dummy-data';

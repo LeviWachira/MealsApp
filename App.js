@@ -2,8 +2,20 @@ import React, { useState } from 'react';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { StyleSheet } from 'react-native';
-import MealsNavigator from './src/navigation/MealsNavigator';
 import { useScreens } from 'react-native-screens';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+
+import MealsNavigator from './src/navigation/MealsNavigator';
+import mealsReducer from './src/store/reducer/meal';
+
+//rootReducer is merge any reducer
+const rootReducer = combineReducers({
+  meals: mealsReducer
+});
+
+//this create store is main data store of react
+const store = createStore(rootReducer);
 
 useScreens();
 
@@ -18,6 +30,7 @@ export default function App() {
 
   const [fontLoaded, setFontLoaded] = useState(false);
 
+  //this for load Font open-sans
   if (fontLoaded) {
     return (
       <AppLoading
@@ -28,8 +41,11 @@ export default function App() {
     )
   }
 
+  //this is main functional component
   return (
-    <MealsNavigator />
+    <Provider store={store}>
+      <MealsNavigator />
+    </Provider>
   );
 }
 
