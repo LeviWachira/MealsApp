@@ -9,6 +9,14 @@ const FavouritesScreen = props => {
 
     const favMeals = useSelector(state => state.meals.favouriteMeals);
 
+    if (favMeals.length === 0 || !favMeals) {
+        return (
+            <View style={styles.content}>
+                <Text>No favourite meals found. Start adding some!</Text>
+            </View>
+        );
+    };
+
     return (
         <MealList listData={favMeals} navigation={props.navigation} />
     );
@@ -32,5 +40,13 @@ FavouritesScreen.navigationOptions = NavData => {
     }
 };
 
+const styles = StyleSheet.create({
+    content: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+})
 
-export default FavouritesScreen ;
+
+export default FavouritesScreen;
