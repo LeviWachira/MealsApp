@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, StyleSheet, Platform, Switch } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useDispatch } from 'react-redux';
+
 import CustomHeaderButton from '../components/CustomHeaderButton';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { setFilters } from '../store/action/meal';
 
 const FiltersSwitch = props => {
     return (
@@ -26,6 +29,8 @@ const FiltersScreen = props => {
     const [isVegan, setIsVegan] = useState(false);
     const [isVegetarian, setIsVegetarian] = useState(false);
 
+    const dispatch = useDispatch();
+
     const saveFilters = useCallback(() => {
         const appliesFilters = {
             glutenFree: isGlutenFree,
@@ -34,6 +39,8 @@ const FiltersScreen = props => {
             vegetarian: isVegetarian,
         };
         console.log(appliesFilters);
+
+        dispatch(setFilters(appliesFilters));
     }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian])
 
     useEffect(() => {
@@ -45,7 +52,7 @@ const FiltersScreen = props => {
             <View style={styles.empty}>
 
             </View>
-            <FiltersSwitch 
+            <FiltersSwitch
                 label={'Gluten-free'}
                 state={isGlutenFree}
                 onChange={newValue => setIsGlutenFree(newValue)}
@@ -100,13 +107,13 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: Platform.OS === 'android' ? 'white' : '#dcdcdc',  
+        backgroundColor: Platform.OS === 'android' ? 'white' : '#dcdcdc',
     },
     title: {
         fontWeight: 'bold',
         fontSize: 19,
         textAlign: 'center',
-        margin: 20 ,
+        margin: 20,
     },
     filterContainer: {
         flexDirection: 'row',
@@ -122,8 +129,8 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16
     },
-    empty : {
-        height : Platform.OS === 'ios' ? '7%' : 15 ,
+    empty: {
+        height: Platform.OS === 'ios' ? '7%' : 15,
     }
 })
 
